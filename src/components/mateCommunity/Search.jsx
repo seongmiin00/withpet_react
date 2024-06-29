@@ -1,14 +1,7 @@
-import { useContext, useState } from "react";
-import { petContext } from "./PetContext";
+import { useState } from "react";
 
 function Search(props){
     const [ searchWord, setSearchWord ] = useState(props.searchWord);
-
-    // console.log(searchWord);
-
-    // if (searchWord != null && searchWord != ''){
-    //     document.getElementById('searchWord').value = searchWord;
-    // }
 
     function changeSearchWord(){
         let word = document.getElementById('searchWord').value;

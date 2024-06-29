@@ -1,65 +1,147 @@
+function CheckDate(props){
+    const date = new Date(props.assembleTime.split(" ")[0]);  // assembleTime을 Date 객체로 변환
+    const today = new Date();
 
+    function ChageStatus(){
+        if(date <today){
+            return('모집종료');
+        }else{
+            if (props.status == 0){
+                return('모집중');
+            }else if (props.status == 1){
+                return('모집마감');
+            }
+        }
+    }
 
-function CommunityList(){
     return(
-        <table className="table table-hover" style={{margin: '20px auto'}}>
-            <colgroup>
-                <col style={{width:'15%'}}></col>
-                <col style={{width:'35%'}}></col>
-                <col style={{width:'15%'}}></col>
-                <col style={{width:'15%'}}></col>
-                <col style={{width:'20%'}}></col>
-            </colgroup>
-            <thead>
-            <tr>
-                <th className="th_bs" style={{textAlign:'center', borderRight : '1px solid'}}>분류</th>
-                <th className="th_bs" style={{textAlign:'center', borderRight : '1px solid'}}>제목</th>
-                <th className="th_bs" style={{textAlign:'center', borderRight : '1px solid'}}>모집 인원</th>
-                <th className="th_bs" style={{textAlign:'center', borderRight : '1px solid'}}>모집 상태</th>
-                <th className="th_bs" style={{textAlign:'center'}}>작성일</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr style={{cursor: 'pointer'}}>
-                <td className="td_basic" style={{textAlign: 'center'}}>
-                    <span ></span>
-                </td>
-                <td className="td_left align-middle">
-                    <span style="font-weight: bold; margin-left: 10px;"></span>
-                </td>
-
-                <td className="td_left align-middle" style="text-align: center;">
-                    <span th:text="${mateCommunityVO.walkingM}" ></span> 명
-                </td>
-
-                <td className="td_left align-middle" style="text-align: center;">
-                    <span th:id="'current_status' + ${mateCommunityVO.MCommunityNo}" style="font-weight: bold"></span>
-                </td>
-
-                <td className="td_left align-middle" style="text-align: center;">
-                    <span th:id="'rdate'+${mateCommunityVO.mCommunityNo}" th:text="${mateCommunityVO.WDate.substring(0, 10)}" style="font-weight: normal"></span>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        <span style={{fontWeight: 'bold'}}>
+            <ChageStatus/>
+        </span>
     )
 }
 
-{/* <script th:inline="javascript">
-    window.addEventListener('load', function() {
-        // 집합 날짜가 현재 날짜보다 작을경우(과거)
-        if (new Date([[${mateCommunityVO.assembleTime.split(" ")}]][0]) < new Date()){
-            let status = document.getElementById('current_status' + [[${mateCommunityVO.MCommunityNo}]]);
-            status.innerText = '모집 종료';
-        } else{
-            let status = document.getElementById('current_status' + [[${mateCommunityVO.MCommunityNo}]]);
-            if ([[${mateCommunityVO.status}]] == 0){
-                status.innerText = '모집중';
-            } else if([[${mateCommunityVO.status}]] == 1) {
-                status.innerText = '모집 마감';
-            }
-        }
+function Wdate(props){
+    const today = new Date();
 
+    const year = today.getFullYear();
+    const month = ('0' + (today.getMonth() + 1)).slice(-2);
+    const day = ('0' + today.getDate()).slice(-2);
+
+    const dateString = year + '-' + month  + '-' + day;
+
+    const wdate = props.wdate.substring(0,10);
+    const time = props.wdate.substring(11,16);
+    
+    function CheckWdate(){
+        if(dateString == wdate){
+            return time;
+        }else{
+            return wdate;
+        }
+    }
+
+    return(
+        <span id='rdate' style={{fontWeight: 'normal'}}>
+            <CheckWdate/>
+        </span>
+    )
+
+}
+
+function CommunityList(props){
+
+    const getPetType = (petTypeNo) => {
+        switch (petTypeNo) {
+            case 1:
+                return '강아지';
+            case 2:
+                return '고양이';
+            default:
+                return '기타';
+        }
+    };
+
+    if (parseInt(props.list.length) > 0){
+    return(
+            <table className="table table-hover" style={{margin: '20px auto,'}}>
+                <colgroup>
+                    <col style={{width:'15%'}}></col>
+                    <col style={{width:'35%'}}></col>
+                    <col style={{width:'15%'}}></col>
+                    <col style={{width:'15%'}}></col>
+                    <col style={{width:'20%'}}></col>
+                </colgroup>
+                <thead>
+                <tr>
+                    <th className="th_bs" style={{textAlign:'center', borderRight : '1px solid'}}>분류</th>
+                    <th className="th_bs" style={{textAlign:'center', borderRight : '1px solid'}}>제목</th>
+                    <th className="th_bs" style={{textAlign:'center', borderRight : '1px solid'}}>모집 인원</th>
+                    <th className="th_bs" style={{textAlign:'center', borderRight : '1px solid'}}>모집 상태</th>
+                    <th className="th_bs" style={{textAlign:'center'}}>작성일</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {props.list&&props.list.map((VO)=>{
+                        return(
+                            <tr style={{cursor: 'pointer'}}>
+                                <td className="td_basic" style={{textAlign: 'center'}}>
+                                    {getPetType(VO.petTypeNo)}
+                                </td>
+                                <td className="td_left align-middle">
+                                    <span style={{fontWeight: 'bold', marginLeft: '10px'}}>{VO.title}</span>
+                                </td>
+                
+                                <td className="td_left align-middle" style={{textAlign: 'center'}}>
+                                    <span>{VO.walkingM}</span> 명
+                                </td>
+                
+                                <td className="td_left align-middle" style={{textAlign: 'center'}}>
+                                    <CheckDate assembleTime={VO.assembleTime} status={VO.status} />
+                                </td>
+                
+                                <td className="td_left align-middle" style={{textAlign: 'center'}}>
+                                    <Wdate wdate={VO.wdate}/>
+                                </td>
+                            </tr>
+                        )
+                    })}
+                </tbody>
+            </table>
+        )
+    }else{
+        return(
+            <>
+                <table className="table table-hover" style={{margin: '20px auto,'}}>
+                    <colgroup>
+                        <col style={{width:'15%'}}></col>
+                        <col style={{width:'35%'}}></col>
+                        <col style={{width:'15%'}}></col>
+                        <col style={{width:'15%'}}></col>
+                        <col style={{width:'20%'}}></col>
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th className="th_bs" style={{textAlign:'center', borderRight : '1px solid'}}>분류</th>
+                        <th className="th_bs" style={{textAlign:'center', borderRight : '1px solid'}}>제목</th>
+                        <th className="th_bs" style={{textAlign:'center', borderRight : '1px solid'}}>모집 인원</th>
+                        <th className="th_bs" style={{textAlign:'center', borderRight : '1px solid'}}>모집 상태</th>
+                        <th className="th_bs" style={{textAlign:'center'}}>작성일</th>
+                    </tr>
+                    </thead>
+                </table>
+                <div style={{textAlign: 'center', padding: '160px'}}>
+                    <span>작성된 게시글이 없습니다.</span><br/>
+                    <span>첫 게시글을 작성해주세요!</span>
+                </div>
+            </>
+        )
+    }
+}
+
+export default CommunityList;
+
+{/* <script th:inline="javascript">
         let today = new Date();
 
         let year = today.getFullYear();
