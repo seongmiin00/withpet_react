@@ -2,6 +2,7 @@
     /*padding-left: 150px;*/
     padding : 0px 11%;
     box-shadow: 0px -2px 15px 0 #00000030;
+    position: relative;
 }
 
 .title{
@@ -81,4 +82,8 @@ a:active{
 .a_button:active{
     /*background-color: rgb(0 0 0 / 18%);*/
     color: #92C7FF !important;
+}
+
+.fixed-top {
+    position: relative;
 }

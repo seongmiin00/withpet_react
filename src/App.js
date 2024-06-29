@@ -6,9 +6,10 @@ import Footer from './components/footer/Footer';
 function App() {
   return (
       <>
-        <NavBar/>
-        <Router/>
-        <Footer/>
+          <NavBar />
+          <div style={{marginTop : '100px'}}></div>
+          <Router/>
+          <Footer/>
       </>
   );
 }

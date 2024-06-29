@@ -4,11 +4,13 @@ import '../../styles/navbar.css';
 import LoginMenu from './LoginMenu';
 import links from '../../constants/NavBarList';
 import NavBarUl from './NavBarUl';
+import '/NavbarCustom.scss';
 
 function NavBar(){
 
 	return(
-		<nav className="navbar navbar-expand-lg nav_bar_style fixed-top pt-4 pb-4" aria-label="Eighth navbar example" style={{backgroundColor: "white"}}>
+		<nav className="navbar navbar-expand-lg nav_bar_style fixed-top pt-4 pb-4" aria-label="Eighth navbar example"
+			 style={{backgroundColor: "white"}}>
 			<div className="container">
 				<Link to="/" className="title">WITHPET</Link>
 				<button className="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07" 
