@@ -5,11 +5,11 @@ import CultureFacilityImages from './CultureFacilityImages';
 
 function Main(){
     return(
-        <>
+        <div style={{width: '100%', textAlign: 'center'}}>
             <MainImage/>
             <MainFunction/>
             <CultureFacilityImages/>
-        </>
+        </div>
     )
 }
 
