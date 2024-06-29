@@ -1,8 +1,13 @@
-// import '../../styles/index.css';
+import {getListAll, tempData} from "./list_all";
+import NoticeContent from "./NoticeContent";
 
 export default function Notice() {
+    const noticeList = getListAll;
+    const temp = tempData;
+
     return (
         <>
+            <div style={{width: '80%', margin: 'auto'}}>
             <div className='title_line'>공지사항</div>
 
                 <aside className="aside_right">
@@ -39,6 +44,9 @@ export default function Notice() {
                             <th className='th_bs'>등록일</th>
                         </tr>
                     </thead>
+                    <tbody>
+                        <NoticeContent data={temp}/>
+                    </tbody>
 
                     {/*<tr th:each="noticeVO, status:${list_all}">*/}
                     {/*    <td class='td_left'><a th:href="@{|./read?noticeno=${noticeVO.noticeno}|}" th:text="${status.count}"></a></td>*/}
@@ -48,6 +56,7 @@ export default function Notice() {
                     {/*    </td>*/}
                     {/*</tr>*/}
                 </table>
+            </div>
         </>
     );
 }
