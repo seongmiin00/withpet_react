@@ -5,7 +5,7 @@ import CultureFacilityImages from './CultureFacilityImages';
 
 function Main(){
     return(
-        <div style={{width: '100%', textAlign: 'center'}}>
+        <div style={{width: '100%', textAlign: 'center', marginTop: '-100px'}}>
             <MainImage/>
             <MainFunction/>
             <CultureFacilityImages/>

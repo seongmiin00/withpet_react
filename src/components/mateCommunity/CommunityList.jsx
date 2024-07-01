@@ -1,8 +1,10 @@
+import { Link } from "react-router-dom";
+
 function CheckDate(props){
     const date = new Date(props.assembleTime.split(" ")[0]);  // assembleTime을 Date 객체로 변환
     const today = new Date();
 
-    function ChageStatus(){
+    function ChangeStatus(){
         if(date <today){
             return('모집종료');
         }else{
@@ -16,7 +18,7 @@ function CheckDate(props){
 
     return(
         <span style={{fontWeight: 'bold'}}>
-            <ChageStatus/>
+            <ChangeStatus/>
         </span>
     )
 }
@@ -89,7 +91,9 @@ function CommunityList(props){
                                     {getPetType(VO.petTypeNo)}
                                 </td>
                                 <td className="td_left align-middle">
-                                    <span style={{fontWeight: 'bold', marginLeft: '10px'}}>{VO.title}</span>
+                                    <span style={{fontWeight: 'bold', marginLeft: '10px'}}>
+                                        <Link to={`/mateCommunity/read/${VO.mcommunityNo}?page=${props.nowPage}&cateNo=${props.cateNo}`}>{VO.title}</Link>    
+                                    </span>
                                 </td>
                 
                                 <td className="td_left align-middle" style={{textAlign: 'center'}}>

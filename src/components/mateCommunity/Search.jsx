@@ -1,19 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-function Search(props){
-    const [ searchWord, setSearchWord ] = useState(props.searchWord);
+function Search({searchWord, setSearchWord}) {
+    const [inputValue, setInputValue] = useState(searchWord);
 
-    function changeSearchWord(){
-        let word = document.getElementById('searchWord').value;
-        setSearchWord(word);
+    function handleChange(event) {
+        setInputValue(event.target.value);
     }
+
+    function handleSearch() {
+        setSearchWord(inputValue);
+    }
+
+    useEffect(()=>{
+
+    },searchWord)
 
     return (
         <div className="search-box">
-            <input placeholder="검색어 입력" id="searchWord" className="search-input" value={searchWord && searchWord}/>
-            <button id="search-btn" className="search-btn" type="button" onClick={()=>changeSearchWord}>검색</button>
+            <input placeholder="검색어 입력" id="searchWord" className="search-input" value={inputValue} onChange={handleChange}/>
+            <button id="search-btn" className="search-btn" type="button" onClick={()=>handleSearch}>검색</button>
         </div>
-    )
+    );
 }
 
 export default Search;

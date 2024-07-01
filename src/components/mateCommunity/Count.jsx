@@ -1,10 +1,6 @@
-import { useContext } from "react";
-import { petContext } from "./PetContext";
-
 function Count(props){
-    const {searchWord} = useContext(petContext);
 
-    if (searchWord == ''){
+    if (props.searchWord == ''){
         return(
             <span>총 모집글 수 {props.count}</span>
         )

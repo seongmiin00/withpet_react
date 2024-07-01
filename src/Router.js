@@ -3,24 +3,19 @@ import Main from "./components/main/Main";
 import MateCommunity from "./components/mateCommunity/MateCommunity";
 import Notice from "./components/notice/Notice";
 import NavBar from "./components/navbar/NavBar";
+import Read from "./components/mateCommunity/Read";
 
 function Router() {
     return (
-
         <Routes>
-            {/* NavBar */}
             <Route path={'/'} element={ <Main/> } />
             <Route path={'/notice/list_all'} element={<Notice />}/>
             <Route path={'/culturefacility/list_search'}/>
-            {/*<Route path={`/mateCommunity/list_all/:cateNo/:searchWord`} element={ <MateCommunity/> }/>*/}
-            <Route path={`/mateCommunity/list_all/:cateNo`} element={ <MateCommunity/> }/>
             <Route path={'/community/list_all'}/>
 
-            {/*  Login menu  */}
-            {/*<Route path={'/member/login'} element={} />*/}
-            {/*<Route path={'/member/create'} element={} />*/}
-            {/*<Route path={'/member/findIdView'} element={} />*/}
-            {/*<Route path={'/member/findPasswdView'} element={} />*/}
+            {/* 산책 메이트 커뮤니티 */}
+            <Route path={`/mateCommunity/list_all/:cateNo`} element={ <MateCommunity/> }/>
+            <Route path={`/mateCommunity/read/:postId`} element={ <Read/> } />
         </Routes>
     );
 }

@@ -24,4 +24,30 @@ function ListAside(){
     );
 }
 
-export default ListAside;
+function ReadAside(props){
+    const { userNo } = useContext(sessionContext);
+    
+    return (
+        <aside className="aside_right">
+            <a onClick={() => window.location.reload()} style={{cursor: 'pointer'}}>새로고침</a>
+            <span className='menu_divide'>│</span>
+            <Link to={`/mateCommunity/list_all/${props.cateNo}?page=${props.page}`}>모집글 목록</Link>
+            <span className='menu_divide'> │ </span>
+            <Link to={`/mateCommunity/list_all/${props.cateNo}?page=${props.page}`}>후기 조회</Link>
+            {userNo == props.memberNo && (
+                <>
+                    <span className='menu_divide'>│</span>
+                    <Link to={`/mateCommunity/list_all/${props.cateNo}?page=${props.page}`}>모집글 목록</Link>
+                    <span className='menu_divide'> │ </span>
+                    <Link to={`/mateCommunity/list_all/${props.cateNo}?page=${props.page}`}>후기 조회</Link>
+                    <span className='menu_divide'>│</span>
+                    <Link to={`/mateCommunity/list_all/${props.cateNo}?page=${props.page}`}>모집글 목록</Link>
+                    <span className='menu_divide'> │ </span>
+                    <Link to={`/mateCommunity/list_all/${props.cateNo}?page=${props.page}`}>후기 조회</Link>
+                </>
+            )}
+        </aside>
+    );
+}
+
+export { ListAside, ReadAside };
