@@ -8,7 +8,7 @@ const links = [
         name: '함께 갈 수 있는곳'
     },
     {
-        link : `/mateCommunity/list_all/0`, 
+        link : `/mateCommunity/list_all/0?searchWord=${''}`, 
         name: '산책 메이트'
     },
     {

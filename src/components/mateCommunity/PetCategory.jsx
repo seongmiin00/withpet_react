@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-function PetCate(props){
+function PetCate({cateNo, setSearchWord}){
     const [cates, setCates] = useState();
 
     useEffect(()=>{
@@ -15,17 +15,19 @@ function PetCate(props){
     return(
         <div className="row mb-3 text-center">
             <Link className={`col pt-3 themed-grid-col 
-            ${props.cateNo == 0 ? 'cate-on' : 'cate-off'}`}
+            ${cateNo == 0 ? 'cate-on' : 'cate-off'}`}
                 style={ {textDecoration : 'none', cursor: 'pointer'} } 
-                to={`/mateCommunity/list_all/${0}`}>
+                to={`/mateCommunity/list_all/${0}?searchWord=${''}`}
+                onClick={()=>{setSearchWord('')}}>
                     전체
             </Link>
             {cates&&cates.map((cate) => {
                 return(
                     <Link key={cate.petTypeNo} className={`col pt-3 themed-grid-col 
-                        ${props.cateNo == cate.petTypeNo ? 'cate-on' : 'cate-off'}`}
+                        ${cateNo == cate.petTypeNo ? 'cate-on' : 'cate-off'}`}
                         style={ {textDecoration : 'none', cursor: 'pointer'} } 
-                        to={`/mateCommunity/list_all/${cate.petTypeNo}`}>
+                        to={`/mateCommunity/list_all/${cate.petTypeNo}?searchWord=${''}`}
+                        onClick={()=>{setSearchWord('')}}>
                         {cate.petType}
                     </Link>
                 )

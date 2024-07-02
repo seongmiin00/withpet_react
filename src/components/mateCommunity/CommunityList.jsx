@@ -92,7 +92,7 @@ function CommunityList(props){
                                 </td>
                                 <td className="td_left align-middle">
                                     <span style={{fontWeight: 'bold', marginLeft: '10px'}}>
-                                        <Link to={`/mateCommunity/read/${VO.mcommunityNo}?page=${props.nowPage}&cateNo=${props.cateNo}`}>{VO.title}</Link>    
+                                        <Link to={`/mateCommunity/read/${VO.mcommunityNo}?page=${props.nowPage}&cateNo=${props.cateNo}&searchWord=${props.searchWord}`}>{VO.title}</Link>    
                                     </span>
                                 </td>
                 

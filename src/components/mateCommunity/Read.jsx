@@ -27,6 +27,7 @@ function Read(){
     const [query, setQuery] = useSearchParams()
     const page = query.get('page');
     const cateNo = query.get('cateNo');
+    const searchWord = query.get('searchWord');
     const [post, setPost] = useState([]);
     const {userNo} = useContext(sessionContext);
 
@@ -50,7 +51,7 @@ function Read(){
                     <div className='title_line2'>
                         산책 메이트 모집
                     </div>
-                    <ReadAside cateNo={cateNo} page={page}/>
+                    <ReadAside cateNo={cateNo} page={page} searchWord={searchWord}/>
                     <div class="menu_line"></div>
                     <div>
                         <div className="row mb-3 text-center pb-3" style={{borderBottom: '3px solid rgba(33, 150, 243, 0.95)'}}>
