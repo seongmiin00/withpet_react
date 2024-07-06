@@ -3,14 +3,17 @@ import axios from "axios";
 // 리스트 가져오기
 const getListAll = async () => {
     try {
-        axios.get('http://localhost:9093/notice/list_all')
-            .then(response => {
-                return response;
-            })
+        const response = await axios.get('http://localhost:9093/api/notice/list_all');
+        return response.data;
     } catch (e) {
         console.log(e);
     }
 }
+
+getListAll().then((data) => {
+    console.log(data);
+})
+
 
 const tempData = [
     {

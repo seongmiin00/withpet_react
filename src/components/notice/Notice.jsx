@@ -1,9 +1,27 @@
-import {getListAll, tempData} from "./list_all";
-import NoticeContent from "./NoticeContent";
+import {getListAll} from "./list_all";
+import {useEffect, useState} from "react";
 
 export default function Notice() {
-    const noticeList = getListAll;
-    const temp = tempData;
+    const [noticeList, setNoticeList] = useState([]);
+
+    // 컴포넌트가 마운트 될 때 데이터를 가져오기 위함
+    useEffect(() => {
+        const notices = async () => {
+            try {
+                const data = await getListAll();
+                setNoticeList(data);
+            } catch (e) {
+                console.log(e);
+            }
+        }
+        notices();
+    }, []);
+
+    // 문자 길면 끝부분 ... 으로 바꾸기
+    function truncate(str, maxlength) {
+        return (str.length > maxlength) ?
+            str.slice(0, maxlength - 1) + '…' : str;
+    }
 
     return (
         <>
@@ -22,10 +40,10 @@ export default function Notice() {
                     <span className="menu_devide">│</span>
                     <a>갤러리형</a>
                     <span className="menu_devide">│</span>
-                    <a>새로고침</a>
+                    <a onClick={() => window.location.reload()}
+                       style={{cursor : "pointer"}}
+                    >새로고침</a>
                 </aside>
-
-                {/*<div th:replace="~{notice/list_search_component::list_search_fragment}"></div>*/}
 
                 <div className='menu_line'></div>
 
@@ -45,16 +63,33 @@ export default function Notice() {
                         </tr>
                     </thead>
                     <tbody>
-                        <NoticeContent data={temp}/>
+                    {
+                        noticeList.map((a, i) => {
+                            return (
+                                <tr key={i}>
+                                    <td className={'td_basic'}>{noticeList[i].noticeno}</td>
+                                    <td className={'td_left'}>
+                                        <span style={
+                                            {
+                                                marginLeft : '85px',
+                                                cursor : "pointer"
+                                            }
+                                        }>{truncate(noticeList[i].title)}</span>
+                                    </td>
+                                    <td className={'td_left'}>
+                                        <span style={
+                                            {
+                                                marginLeft : '85px',
+                                                cursor : "pointer"
+                                            }
+                                        }>{truncate(noticeList[i].notice, 20)}</span>
+                                    </td>
+                                    <td className={'td_basic'}>{noticeList[i].noticedate}</td>
+                                </tr>
+                            );
+                        })
+                    }
                     </tbody>
-
-                    {/*<tr th:each="noticeVO, status:${list_all}">*/}
-                    {/*    <td class='td_left'><a th:href="@{|./read?noticeno=${noticeVO.noticeno}|}" th:text="${status.count}"></a></td>*/}
-                    {/*    <td class='td_left'><a th:href="@{|./read?noticeno=${noticeVO.noticeno}|}" th:text="${noticeVO.title}"></a></td>*/}
-                    {/*    <td class='td_left'><a th:href="@{|./read?noticeno=${noticeVO.noticeno}|}" th:text="${noticeVO.notice}"></a></td>*/}
-                    {/*    <td class='td_left'><a th:href="@{|./read?noticeno=${noticeVO.noticeno}|}" th:text="${noticeVO.noticedate}"></a>*/}
-                    {/*    </td>*/}
-                    {/*</tr>*/}
                 </table>
             </div>
         </>
