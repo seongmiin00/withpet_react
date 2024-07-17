@@ -12,7 +12,7 @@ const GlobalProvider = ({ children }) => {
   const [masterLogin, setMasterLogin] = useState(false);      // 첫번째 전역 변수용 state 생성
   const [masterNo, setMasterNo] = useState(0);  // 두번째 전역 변수용 state 생성
   const [masterName, setMasterName] = useState('');
-
+  
   return (
     // <SwContext.Provider value={{ sw, setSw }}>        {/* 첫번째 전역 변수 */}
     //   <AdminnoContext.Provider value={{ employeeno, setEmployeeno }}>   {/* 첫번째 전역 변수 */}

@@ -7,7 +7,7 @@ function ListAside(){
     
     return (
         <aside className="aside_right">
-            <a onClick={() => window.location.reload()}>새로고침</a>
+            <a onClick={() => window.location.reload()} style={{cursor:'pointer'}}>새로고침</a>
             {userLogin && (
                 <>
                     <span className='menu_divide'>│</span>
@@ -31,19 +31,19 @@ function ReadAside(props){
         <aside className="aside_right">
             <a onClick={() => window.location.reload()} style={{cursor: 'pointer'}}>새로고침</a>
             <span className='menu_divide'>│</span>
-            <Link to={`/mateCommunity/list_all/${props.cateNo}?page=${props.page}&searchWord=${props.searchWord}`}>모집글 목록</Link>
+            <Link to={`/mateCommunity/list_all/${props.cateNo}?page=${props.page}&searchWord=${props.searchWord}`} style={{cursor: 'pointer'}}>모집글 목록</Link>
             <span className='menu_divide'> │ </span>
-            <Link to={`/mateCommunity/list_all/${props.cateNo}?page=${props.page}`}>후기 조회</Link>
+            <Link to={`/mateCommunity/list_all/${props.cateNo}?page=${props.page}`} style={{cursor: 'pointer'}}>후기 조회</Link>
             {userNo == props.memberNo && (
                 <>
                     <span className='menu_divide'>│</span>
-                    <Link to={`/mateCommunity/list_all/${props.cateNo}?page=${props.page}`}>모집글 목록</Link>
+                    <Link to={`/mateCommunity/list_all/${props.cateNo}?page=${props.page}`} style={{cursor: 'pointer'}}>모집글 목록</Link>
                     <span className='menu_divide'> │ </span>
-                    <Link to={`/mateCommunity/list_all/${props.cateNo}?page=${props.page}`}>후기 조회</Link>
+                    <Link to={`/mateCommunity/list_all/${props.cateNo}?page=${props.page}`} style={{cursor: 'pointer'}}>후기 조회</Link>
                     <span className='menu_divide'>│</span>
-                    <Link to={`/mateCommunity/list_all/${props.cateNo}?page=${props.page}`}>모집글 목록</Link>
+                    <Link to={`/mateCommunity/list_all/${props.cateNo}?page=${props.page}`} style={{cursor: 'pointer'}}>모집글 목록</Link>
                     <span className='menu_divide'> │ </span>
-                    <Link to={`/mateCommunity/list_all/${props.cateNo}?page=${props.page}`}>후기 조회</Link>
+                    <Link to={`/mateCommunity/list_all/${props.cateNo}?page=${props.page}`}> style={{cursor: 'pointer'}}후기 조회</Link>
                 </>
             )}
         </aside>

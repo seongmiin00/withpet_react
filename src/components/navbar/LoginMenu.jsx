@@ -1,10 +1,31 @@
 import React, { useContext } from 'react';
 import '../../styles/navbar.css';
 import { sessionContext } from '../session/SessionContext'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function LoginMenu(){
-	const {userLogin, userName, masterLogin, masterName} = useContext(sessionContext);
+	const {userLogin, setUserLogin, userNo, setUserNo, userName, setUserName,
+		masterLogin, setMasterLogin, masterNo, setMasterNo, masterName, setMasterName} = useContext(sessionContext);
+
+	const navigate = useNavigate();
+
+	function UserLogout(){
+		axios.get(`http://localhost:9093/api/member/logout`)
+		.then(res=>{
+			const data= res.data;
+			console.log(data);
+			if (data.resultMsg == "invalid_request"){
+				alert("유효하지 않은 요청입니다.");
+			}else{
+				setUserLogin(false);
+				setUserName('');
+				setUserNo(0);
+			}
+			navigate('/');
+		})
+	}
+
 	if (userLogin && !masterLogin){
 		return(
 			<div className="nav-item dropdown pt-2 pb-2">
@@ -13,7 +34,7 @@ function LoginMenu(){
 				<ul className="dropdown-menu" aria-labelledby="dropdown2">
 					<li><Link className="dropdown-item a_button" to={"/member/read"}>마이페이지</Link></li>
 					<li><Link className="dropdown-item a_button" to={"/pet/list"}>반려동물 정보</Link></li>
-					<li><Link className="dropdown-item a_button" to={"/member/logout"}>로그아웃</Link></li>
+					<li><a className="dropdown-item a_button" onClick={UserLogout} style={{cursor:'pointer'}}>로그아웃</a></li>
 				</ul>
 			</div>
 		)
@@ -35,7 +56,7 @@ function LoginMenu(){
 				</ul>
 			</div>
 		)
-	}else{
+	}else if(!userLogin && !masterLogin){
 		return(
 			<>
 				<div className="nav-item dropdown pt-2 pb-2 me-2">
